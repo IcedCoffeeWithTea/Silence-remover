@@ -1,13 +1,10 @@
 import os
-
-import ffmpeg.stream
 from flask import Flask, render_template, request, Response, make_response
 from werkzeug.datastructures import FileStorage
 import subprocess
 
 app = Flask(__name__)
 PORT = 9999
-CHUNK = 1
 
 
 @app.route("/")
