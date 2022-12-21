@@ -1,4 +1,6 @@
 import os
+
+import flask
 from flask import Flask, render_template, request, Response, make_response
 from werkzeug.datastructures import FileStorage
 import subprocess
@@ -14,12 +16,11 @@ def home():
 
 def analyze(file: str):
     filter_command = f"silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-40dB"
-    subprocess.run(["ffmpeg","-hide_banner","-i",f"./tmp/{file}","-af",filter_command,f"./tmp/NEW_{file}"])
+    subprocess.run(["ffmpeg", "-hide_banner", "-i", f"./tmp/{file}", "-af", filter_command, f"./tmp/NEW_{file}"])
     os.remove(f"./tmp/{file}")
-    with open(f"./tmp/NEW_{file}","rb") as f:
-        final = f.read()
-        os.remove(f"./tmp/NEW_{file}")
-        return final
+    f = open(f"./tmp/NEW_{file}", "rb")
+    os.remove(f"./tmp/NEW_{file}")
+    return f
 
 
 @app.route("/audio", methods=["POST"])
@@ -32,7 +33,7 @@ def audio():
     audioFile.close()
     final = analyze(audioFile.filename)
 
-    return final
+    return flask.send_file(final, as_attachment=True, download_name=audioFile.filename)
 
 
 def main():
