@@ -1,0 +1,59 @@
+html {
+    background-color: rgb(23, 22, 29);
+    color: white;
+}
+
+#audio {
+    display: none;
+}
+
+#git-cont {
+    display: flex;
+    justify-content: right;
+}
+
+#github {
+    transition: 750ms;
+    padding-top: 2em;
+    padding-bottom: .5em;
+    padding-left: .25em;
+    padding-right: .25em;
+    position: relative;
+    transform: translateY(-2em);
+    background-color: rgba(202, 141, 27, 0.541);
+}
+
+#github:hover {
+    transition: 750ms;
+    transform: translateY(-.5em);
+    cursor: pointer;
+}
+
+#audio-cont {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 5.5em;
+    border-radius: 1em;
+    text-align: center;
+    height: fit-content;
+    margin: 2.5em 0 2.5em 0;
+}
+
+#sbmt-btn {
+    transition: 250ms;
+    border: none;
+    background-color:rgba(255, 255, 255, 0.377);
+    padding: .5em;
+    border-radius: .5em;
+}
+
+#sbmt-btn:hover {
+    transition: 250ms;
+    background-color:rgba(255, 255, 255, 0.75);
+}
+#audio-f {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

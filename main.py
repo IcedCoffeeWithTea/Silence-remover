@@ -1,7 +1,7 @@
 import os
 
 import flask
-from flask import Flask, render_template, request, Response, make_response
+from flask import Flask, render_template, request, Response, make_response, send_from_directory
 from werkzeug.datastructures import FileStorage
 import subprocess
 
@@ -30,10 +30,24 @@ def audio():
     with open(f"./tmp/{audioFile.filename}", "wb") as f:
         f.write(audioFile.stream.read())
 
-    audioFile.close()
     final = analyze(audioFile.filename)
 
     return flask.send_file(final, as_attachment=True, download_name=audioFile.filename)
+
+
+@app.route("/css/<path:path>")
+def css(path):
+    return send_from_directory("static/css", path)
+
+
+@app.route("/js/<path:path>")
+def js(path):
+    return send_from_directory("static/js", path)
+
+
+@app.route("/images/<path:path>")
+def imgs(path):
+    return send_from_directory("static/images", path)
 
 
 def main():
